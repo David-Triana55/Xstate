@@ -8,13 +8,18 @@ import './BaseLayout.css';
 export const BaseLayout = () => {
     const [state, send] = useMachine(bookingMachine);
     
-    console.log('nuestra maquina', state.value);
-    console.log(state);
+    console.log('nuestra maquina', state.value, state.context);
     
     return (
         <div className='BaseLayout'>
-            <Nav state={state} send={send} />
-            <StepsLayout state={state} send={send}/>
+            <Nav 
+                state={state} 
+                send={send} 
+            />
+            <StepsLayout 
+                state={state} 
+                send={send}
+            />
         </div>
     );
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import './Welcome.css';
-import { log } from 'xstate';
 
 export const Welcome = ({ send }) => {
+    
     const startBooking = () => {
         send({ type: "START" });
     };

@@ -7,6 +7,7 @@ export const Tickets = ({ send, context }) => {
 
     };
     
+    console.log(context);
     return (
         <div className='Tickets'>
             <p className='Tickets-description description'>
@@ -15,9 +16,12 @@ export const Tickets = ({ send, context }) => {
 
             <div className='Tickets-ticket'>
                 <div className='Tickets-country'>
-                    Colombia
+                    {context.selectedCountry}
                 </div>
                 <div className='Tickets-passengers'>
+                    {context.passengers.map((passenger, index) =>(
+                        <li style={{listStyle: 'none'}} key={index}>{passenger}</li>
+                    ))}
                     <span>✈</span>
                 </div>
             </div>

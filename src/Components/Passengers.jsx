@@ -9,18 +9,28 @@ export const Passengers = ({ state, send }) => {
     }
     
     const goToTicket = () => {
+        if(value !== '') {
+            send({ type: 'ADD', newPassenger: value });
+        }
         send({ type: "DONE" });
 
     }
     
     const submit = (e) => {
         e.preventDefault();
+        send({ type: 'ADD', newPassenger: value });
         changeValue('');
     }
+
     
+
+
     return (
         <form onSubmit={submit} className='Passengers'>
             <p className='Passengers-title title'>Agrega a las personas que van a volar ✈️</p>
+                {state.context.passengers.map((passenger, index) => (
+                    <span style={{textAlign: 'start'}} key={index}>{passenger}</span>
+                ))}
             <input 
                 id="name" 
                 name="name" 
@@ -41,7 +51,8 @@ export const Passengers = ({ state, send }) => {
                     className='Passenger-pay button'
                     type="button"
                     onClick={goToTicket}
-                >
+
+                    >
                     Ver mi ticket
                 </button>
             </div>
