@@ -28,9 +28,12 @@ export const Passengers = ({ state, send }) => {
     return (
         <form onSubmit={submit} className='Passengers'>
             <p className='Passengers-title title'>Agrega a las personas que van a volar ✈️</p>
+
                 {state.context.passengers.map((passenger, index) => (
-                    <span style={{textAlign: 'start'}} key={index}>{passenger}</span>
+                    <span style={{textAlign: 'start'}} key={index} >{passenger}</span>
                 ))}
+
+
             <input 
                 id="name" 
                 name="name" 

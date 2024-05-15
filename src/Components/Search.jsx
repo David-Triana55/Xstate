@@ -14,6 +14,7 @@ export const Search = ({ state,send }) => {
     };
     
     const options = state.context.countries;
+    console.log(options);
     
     return (
         <div className='Search'>
@@ -31,7 +32,12 @@ export const Search = ({ state,send }) => {
                 </option>
 
                 {options.map((option) => 
-                    <option value={option.name.common} key={option.name.common}>{option.name.common}</option>
+                    <option 
+                        value={option.name.common} 
+                        key={option.name.common}
+                    > 
+                        {option.name.common}
+                    </option>
                 )}
             </select>
             <button 

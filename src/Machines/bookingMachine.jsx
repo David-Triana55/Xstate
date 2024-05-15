@@ -1,7 +1,7 @@
 import { assign, createMachine, fromPromise } from "xstate";
 import { fetchCountries } from "../utils/api";
 
-console.log(fetchCountries());
+console.log();
 const fillCountries = {
     initial: "loading",
     states: {
@@ -46,56 +46,49 @@ const bookingMachine = createMachine({
     states: {
         initial: {
             on: {
-                START: {
-                    target: 'search',
-                },
-            },
+                START: "search"
+            }
         },
         search: {
             on: {
-                CONTINUE:{
-                    target: 'passengers',
+                CONTINUE: {
+                    target: "passengers",
                     actions: assign({
                         selectedCountry: ({event}) => event.selectedCountry
                     })
                 },
-                CANCEL:'initial',
+                CANCEL: "initial"
             },
             ...fillCountries
         },
         passengers: {
             on: {
-                DONE:{
-                    target: 'tickets',
-                    guard: 'moreThanOnePassenger'
-                },
-                CANCEL: {
-                    target: 'initial',
-                    actions: 'clean'
-                },
+                DONE: "tickets",
+                CANCEL: "initial",
                 ADD: {
-                    target: 'passengers',
                     actions: assign({
-                        newPassenger: ({ context, event }) => context.passengers.push(event.newPassenger),
-                    }),
+                        passengers: ({ context, event }) => [
+                            ...context.passengers,
+                            event.newPassenger
+                        ]
+                    })
                 }
             },
         },
         tickets: {
             after: {
                 5000: {
-                    target: 'initial',
-                    actions: 'clean',
+                    target: "initial",
+                    actions: "clean"
                 }
             },
             on: {
                 FINISH: {
-                    target: 'initial',
-                    actions: 'clean',
+                    target: "initial",
+                    actions: "clean"
                 }
-            },
-        },
-        
+            }
+        }
     }
 },
 {
@@ -120,3 +113,8 @@ const bookingMachine = createMachine({
 );
 
 export default bookingMachine;
+
+
+
+
+
