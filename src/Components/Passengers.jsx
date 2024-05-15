@@ -30,7 +30,7 @@ export const Passengers = ({ state, send }) => {
             <p className='Passengers-title title'>Agrega a las personas que van a volar ✈️</p>
 
                 {state.context.passengers.map((passenger, index) => (
-                    <span style={{textAlign: 'start'}} key={index} >{passenger}</span>
+                    <p style={{textAlign: 'start', margin: 0}} key={index} >{passenger}</p>
                 ))}
 
 
